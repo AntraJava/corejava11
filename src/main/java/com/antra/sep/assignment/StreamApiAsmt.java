@@ -39,6 +39,15 @@ public class StreamApiAsmt {
 
         List<String> nameList = getPersonNameAgeBetween(20, 30, pList);
         System.out.println("8. Get Person Age between 20 and 30 : " + nameList);
+
+        // Key is the first character of the name, value is the list of person with the same first character.
+        // like  A->[Annie, Austin], B->[Bob], C->[Clair, Charlie]
+        Map<Character, List<Person>> pMap = groupPersonByFirstCharacter(pList);
+        System.out.println("9. Get Person Map : " + pMap);
+
+        // find the largest number from the 'list of list of int' below
+        List<List<Integer>> listOfListOfInteger = List.of(List.of(10,9,8), List.of(11, 22, 33), List.of(44, 56, 67), List.of(41, 52, 63));
+        System.out.println("10. Get List of List of Integer : " + findLargestInteger(listOfListOfInteger));
     }
     // Write your code in below methods.
     // 1 line of code is enough.
@@ -74,6 +83,14 @@ public class StreamApiAsmt {
     private static List<String> getPersonNameAgeBetween(int from, int to, List<Person> pList) {
         return null;
     }
+    //Question #9
+    private static Map<Character, List<Person>> groupPersonByFirstCharacter(List<Person> pList) {
+        return null;
+    }
+    //Question #10
+    private static Integer findLargestInteger(List<List<Integer>> listOfListOfInteger) {
+        return null;
+    }
 }
 
 class Person {
@@ -103,7 +120,7 @@ class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
+        return "{" +
                 "age=" + age +
                 ", name='" + name + '\'' +
                 '}';
