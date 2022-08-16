@@ -1,6 +1,7 @@
 package com.antra.sep.assignment;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class StreamApiAsmt {
     // init a Person list with random data
@@ -29,6 +30,15 @@ public class StreamApiAsmt {
 
         List<Person>  sortByAge = sortPersonByAge(pList);
         System.out.println("5. Sorted By Age : " + sortByAge);
+
+        List<Person> newList = removePersonOlderThan(50, pList);
+        System.out.println("6. Remove Person older than 50 : " + newList);
+
+        int maxAge = getMaxAge(pList);
+        System.out.println("7. Max Age : " + maxAge);
+
+        List<String> nameList = getPersonNameAgeBetween(20, 30, pList);
+        System.out.println("8. Get Person Age between 20 and 30 : " + nameList);
     }
     // Write your code in below methods.
     // 1 line of code is enough.
@@ -50,6 +60,18 @@ public class StreamApiAsmt {
     }
     //Question #5
     private static List<Person> sortPersonByAge(List<Person> pList) {
+        return null;
+    }
+    //Question #6
+    private static List<Person> removePersonOlderThan(int ageLimit, List<Person> pList) {
+        return null;
+    }
+    //Question #7
+    private static int getMaxAge(List<Person> pList) {
+        return -1;
+    }
+    //Question #8
+    private static List<String> getPersonNameAgeBetween(int from, int to, List<Person> pList) {
         return null;
     }
 }
