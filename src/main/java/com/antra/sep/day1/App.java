@@ -16,7 +16,4 @@ public class App {  // Naming convention: ClassName
     public static void main(String[] args) { // Naming convention: MethodName
         System.out.println("Hello World!");  // Explain this line
     }
-    /**
-     *  Constructor Elements
-     */
 }
