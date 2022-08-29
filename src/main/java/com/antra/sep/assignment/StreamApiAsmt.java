@@ -3,13 +3,15 @@ package com.antra.sep.assignment;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
+
 public class StreamApiAsmt {
     // init a Person list with random data
     static List<Person> pList = new ArrayList<>();
     static {
         pList.add(new Person(24, "John1"));pList.add(new Person(31, "Mary2"));pList.add(new Person(42, "Peter3"));pList.add(new Person(54, "Paul4"));
         pList.add(new Person(21, "James5"));pList.add(new Person(33, "Jane6"));pList.add(new Person(45, "Mary7"));pList.add(new Person(56, "Paul8"));
-        pList.add(new Person(23, "James9"));pList.add(new Person(34, "Jane10"));pList.add(new Person(46, "Mary11"));pList.add(new Person(58, "Paul12"));
+        pList.add(new Person(23, "James9"));pList.add(new Person(34, "Jane10"));pList.add(new Person(46, "Mary11"));pList.add(new Person(60, "Paul12"));
         pList.add(new Person(25, "James13"));pList.add(new Person(36, "Jane14"));pList.add(new Person(48, "Mary15"));pList.add(new Person(60, "Paul16"));
         pList.add(new Person(27, "James17"));pList.add(new Person(38, "Jane18"));pList.add(new Person(50, "Mary19"));
     }
@@ -17,7 +19,7 @@ public class StreamApiAsmt {
     public static void main(String[] args) {
 
         List<Person> youngPersonList = getYoung(pList, 40);
-        System.out.println("1. Young : " + youngPersonList);
+        System.out.println("1. Younger than 40 person list : " + youngPersonList);
 
         List<Person> namePersonList = getPersonNameStartWith("J",pList);
         System.out.println("2. Get Person Name starts with J : " + namePersonList);
@@ -37,7 +39,7 @@ public class StreamApiAsmt {
         int maxAge = getMaxAge(pList);
         System.out.println("7. Max Age : " + maxAge);
 
-        List<String> nameList = getPersonNameAgeBetween(20, 30, pList);
+        String nameList = getPersonNameAgeBetween(20, 30, pList);
         System.out.println("8. Get Person Age between 20 and 30 : " + nameList);
 
         // Key is the first character of the name, value is the list of person with the same first character.
@@ -56,43 +58,55 @@ public class StreamApiAsmt {
 
     //Question #1
     private static List<Person> getYoung(List<Person> pList, int ageLimit) {
-        return null;
+//        List<Person> newList = new ArrayList<>();
+//        for (Person person : pList) {
+//            if (person.getAge() < ageLimit) {
+//                newList.add(person);
+//            }
+//        }
+//        return newList;
+        // Operation + Operation +...+
+        // intermediate operations ..... 1 terminal operation
+        // stream must have terminal operation.
+        return pList.stream().filter( person -> person.getAge() < ageLimit).collect(toList());
     }
     //Question #2
     private static List<Person> getPersonNameStartWith(String startWith, List<Person> pList) {
-        return null;
+        return pList.stream().filter( person -> person.getName().startsWith(startWith)).collect(toList());
     }
     //Question #3
     private static List<String> getPersonName(List<Person> pList) {
-        return null;
+        return pList.stream().map(Person::getName).collect(toList());
     }
     //Question #4
     private static Long getAgeSum(List<Person> pList) {
-        return null;
+        return pList.stream().mapToLong(Person::getAge).sum();
     }
     //Question #5
     private static List<Person> sortPersonByAge(List<Person> pList) {
-        return null;
+        return pList.stream().sorted( Comparator.comparing(Person::getAge).reversed().thenComparing( (a,b)->b.getName().compareTo(a.getName())) ).collect(toList());
     }
     //Question #6
     private static List<Person> removePersonOlderThan(int ageLimit, List<Person> pList) {
-        return null;
+        return pList.stream().filter( p -> p.getAge() < ageLimit).collect(toList());
     }
     //Question #7
     private static int getMaxAge(List<Person> pList) {
-        return -1;
+//        pList.stream().mapToInt(p -> p.getAge()).max();
+        pList = new ArrayList<>();
+        return pList.stream().map(p -> p.getAge()).max(Comparator.comparing(Integer::intValue)).orElse(100);
     }
     //Question #8
-    private static List<String> getPersonNameAgeBetween(int from, int to, List<Person> pList) {
-        return null;
+    private static String getPersonNameAgeBetween(int from, int to, List<Person> pList) {
+        return pList.stream().filter( p -> p.getAge() > from && p.getAge() < to ).map(Person::getName).collect(Collectors.joining("*"));
     }
     //Question #9
     private static Map<Character, List<Person>> groupPersonByFirstCharacter(List<Person> pList) {
-        return null;
+        return pList.stream().collect(Collectors.groupingBy( p -> p.getName().charAt(0)));
     }
-    //Question #10
+    //Question #10   // flatMap() vs map()
     private static Integer findLargestInteger(List<List<Integer>> listOfListOfInteger) {
-        return null;
+        return listOfListOfInteger.stream().flatMap( l -> l.stream()).max(Comparator.comparing(Integer::intValue)).get();
     }
 }
 
