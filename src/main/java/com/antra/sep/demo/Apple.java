@@ -1,20 +1,36 @@
 package com.antra.sep.demo;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
+public class Apple{
+    private String colorPrivate;
+    public String colorPublic;
+    protected String colorProtected;
 
-public class Apple {
- // no field . no updatable fields    -   stateless class
-
-    public AtomicInteger counter ;
-    public volatile Object lock;
-    public void increaseCounter() {
-        synchronized (lock) {
-            counter.incrementAndGet();
-        }
+    public Apple() {
     }
 
-   public synchronized void increaseCounte2(){}
+    public Apple(String colorPrivate, String colorPublic, String colorProtected) {
+        this.colorPrivate = colorPrivate;
+        this.colorPublic = colorPublic;
+        this.colorProtected = colorProtected;
+    }
 
+    @Antra
+    public int aMethod(String input) {
+        return 1;
+    }
+
+    @Antra // call the method
+    private String bMethod(String input) {
+        System.out.println(input);
+        return "you give me an input of : " + input;
+    }
+
+    @Override
+    public String toString() {
+        return "Apple{" +
+                "colorPrivate='" + colorPrivate + '\'' +
+                ", colorPublic='" + colorPublic + '\'' +
+                ", colorProtected='" + colorProtected + '\'' +
+                '}';
+    }
 }
